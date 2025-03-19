@@ -18,21 +18,24 @@ jobs:
       - name: Set Up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.13"
+          python-version: "3.10"
 
       - name: Install Dependencies
         run: |
-          pip install selenium pandas openpyxl filelock
+          pip install selenium==4.29.0 pandas==2.2.3 openpyxl==3.1.5 filelock==3.18.0
           wget -q https://chromedriver.storage.googleapis.com/115.0.5790.170/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/bin/chromedriver
           sudo chmod +x /usr/bin/chromedriver
+          echo "Dependencies installed."
 
       - name: Set Up Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
+          echo "Chrome installed."
 
       - name: Run Automation Script
         run: |
           python fundingpips_automation.py
+          echo "Automation script executed."
