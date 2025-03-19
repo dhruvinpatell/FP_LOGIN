@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main  # Run the script when code is pushed to main
-  workflow_dispatch:  # Allows manual trigger
+  workflow_dispatch:  # Allows manual trigger 
 
 jobs:
   run-selenium:
