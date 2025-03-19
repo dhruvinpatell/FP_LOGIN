@@ -1,0 +1,44 @@
+name: Run Selenium Automation
+
+on:
+  push:
+    branches:
+      - main  # Run the script when code is pushed to main
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  run-selenium:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
+
+    - name: Install Chrome and Chromedriver
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+        wget -N https://chromedriver.storage.googleapis.com/124.0.6367.60/chromedriver-linux64.zip
+        unzip chromedriver-linux64.zip
+        sudo mv chromedriver /usr/bin/chromedriver
+        sudo chmod +x /usr/bin/chromedriver
+        echo "✅ Chrome and Chromedriver installed successfully."
+
+    - name: Install Python Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Selenium Script
+      run: python your_script.py
+
+    - name: Upload Updated Excel File
+      uses: actions/upload-artifact@v3
+      with:
+        name: updated-excel
+        path: newcomm.xlsx
