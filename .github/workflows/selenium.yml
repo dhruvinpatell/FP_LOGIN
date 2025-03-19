@@ -42,3 +42,6 @@ jobs:
       with:
         name: updated-excel
         path: newcomm.xlsx
+      retry:
+        max-attempts: 3
+        delay-seconds: 15
