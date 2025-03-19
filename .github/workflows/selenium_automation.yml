@@ -6,7 +6,7 @@ Here is a potential update to your workflow to add more logging and error handli
 name: Selenium Automation
 
 on:
-  push:
+  push: 
     branches Selenium Automation
 
 on:
